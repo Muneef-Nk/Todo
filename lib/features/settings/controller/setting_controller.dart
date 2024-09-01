@@ -5,6 +5,7 @@ import 'package:todo_list/core/utils/helper_function.dart';
 class SettingController with ChangeNotifier {
   String? name;
   String? email;
+  String? otherField;
 
   Future<void> getUserDetails() async {
     final userId = await getId();
@@ -14,18 +15,23 @@ class SettingController with ChangeNotifier {
     }
 
     try {
-      final doc = await FirebaseFirestore.instance
+      final querySnapshot = await FirebaseFirestore.instance
           .collection('users')
-          .doc(userId)
+          .where('userId', isEqualTo: userId)
+          .limit(1)
           .get();
 
-      if (doc.exists) {
-        name = doc.data()?['name'] ?? 'No name';
-        email = doc.data()?['email'] ?? 'No email';
-        print(name);
-        print(email);
+      if (querySnapshot.docs.isNotEmpty) {
+        final doc = querySnapshot.docs.first;
+
+        name = doc.data()['name'] ?? 'No name';
+        email = doc.data()['email'] ?? 'No email';
+        otherField = doc.data()['otherField'] ?? 'No value';
+        print('Name: $name');
+        print('Email: $email');
+        print('Other Field: $otherField');
       } else {
-        print('Document does not exist');
+        print('No matching document found');
       }
     } catch (e) {
       print('Error fetching user details: $e');

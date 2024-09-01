@@ -24,7 +24,7 @@ class RegisterController with ChangeNotifier {
     );
 
     if (credential.user != null) {
-      saveUserId(credential.user?.uid ?? "");
+      saveUserId(credential.user!.uid);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => CategoryScreen()),

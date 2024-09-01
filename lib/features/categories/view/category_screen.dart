@@ -202,7 +202,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         crossAxisCount: 2,
                         crossAxisSpacing: 15,
                         mainAxisSpacing: 20,
-                        childAspectRatio: 1.4,
+                        childAspectRatio: 1.3,
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       itemCount: categories.length + 1,
@@ -305,7 +305,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                             children: [
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    right: 6),
+                                                    right: 6, bottom: 5),
                                                 child: Icon(
                                                   Icons.more_vert,
                                                   color: AppColors.grey,

@@ -15,7 +15,7 @@ class CategoryController with ChangeNotifier {
   pickImage() async {
     final ImagePicker _picker = ImagePicker();
 
-    XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       final storageRef = FirebaseStorage.instance.ref();
       final imageRef = storageRef.child("categoryIcons");

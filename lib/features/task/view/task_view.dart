@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/core/constants/color_constants.dart';
 import 'package:todo_list/core/constants/font_size.dart';
+import 'package:todo_list/core/utils/helper_function.dart';
 import 'package:todo_list/features/task/controller/task_controller.dart';
 
 class TodoView extends StatefulWidget {
@@ -96,7 +97,29 @@ class _TodoViewState extends State<TodoView> {
                     return Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
+                    return Center(
+                        child: InkWell(
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () {
+                        setState(() {});
+                      },
+                      child: Ink(
+                          width: size.width * 0.5,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(
+                                10,
+                              )),
+                          child: Center(
+                            child: Text(
+                              'Try again',
+                              style: TextStyle(
+                                  fontSize: textSize, color: AppColors.white),
+                            ),
+                          )),
+                    ));
                   }
                   if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                     return Center(child: Text('No tasks available'));
